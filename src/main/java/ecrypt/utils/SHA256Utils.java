@@ -5,6 +5,7 @@ import ecrypt.exception.EncryptionException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
+import java.util.Base64;
 
 public class SHA256Utils {
 
@@ -15,7 +16,7 @@ public class SHA256Utils {
             var digest = MessageDigest.getInstance("SHA-256");
             var plain = text + key;
             var hash = digest.digest(plain.getBytes(StandardCharsets.UTF_8));
-            return new String(hash);
+            return Base64.getEncoder().encodeToString(hash);
         } catch (Exception e) {
             throw new EncryptionException("Error while decrypt AES256", e);
         }

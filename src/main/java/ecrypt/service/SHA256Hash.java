@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.Base64;
 
 public class SHA256Hash {
 
@@ -27,7 +28,7 @@ public class SHA256Hash {
     public String convert(String plain) {
         try {
             var hash = MESSAGE_DIGEST.digest(plain.getBytes(StandardCharsets.UTF_8));
-            return new String(hash);
+            return Base64.getEncoder().encodeToString(hash);
         } catch (Exception e) {
             throw new EncryptionException("Error while decrypt AES256", e);
         }
