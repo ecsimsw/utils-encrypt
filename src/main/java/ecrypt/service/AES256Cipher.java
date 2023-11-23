@@ -35,12 +35,20 @@ public class AES256Cipher {
         }
     }
 
+    public String encrypt(String plain) {
+        return new String(encrypt(plain.getBytes()));
+    }
+
     public byte[] encrypt(byte[] plain) {
         try {
             return encryptCipher.doFinal(plain);
         } catch (BadPaddingException | IllegalBlockSizeException e) {
             throw new EncryptionException("Error while decrypt AES256", e);
         }
+    }
+
+    public String decrypt(String plain) {
+        return new String(decrypt(plain.getBytes()));
     }
 
     public byte[] decrypt(byte[] encrypted) {
