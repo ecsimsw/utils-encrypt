@@ -8,9 +8,11 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 public class AES256Cipher {
 
@@ -36,7 +38,8 @@ public class AES256Cipher {
     }
 
     public String encrypt(String plain) {
-        return new String(encrypt(plain.getBytes()));
+        var encrypted = encrypt(plain.getBytes(StandardCharsets.UTF_8));
+        return new String(encrypted);
     }
 
     public byte[] encrypt(byte[] plain) {
@@ -47,8 +50,9 @@ public class AES256Cipher {
         }
     }
 
-    public String decrypt(String plain) {
-        return new String(decrypt(plain.getBytes()));
+    public String decrypt(String encrypted) {
+        var plain = decrypt((Base64.getDecoder().decode(encrypted)));
+        return new String(plain);
     }
 
     public byte[] decrypt(byte[] encrypted) {
