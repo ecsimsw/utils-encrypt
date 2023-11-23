@@ -5,7 +5,6 @@ import ecrypt.exception.EncryptionException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
-import java.util.Arrays;
 
 public class SHA256Utils {
 
@@ -16,7 +15,7 @@ public class SHA256Utils {
             var digest = MessageDigest.getInstance("SHA-256");
             var plain = text + key;
             var hash = digest.digest(plain.getBytes(StandardCharsets.UTF_8));
-            return Arrays.toString(hash);
+            return new String(hash);
         } catch (Exception e) {
             throw new EncryptionException("Error while decrypt AES256", e);
         }
@@ -25,7 +24,7 @@ public class SHA256Utils {
     public static String getSalt(int n) {
         var bytes = new byte[n];
         SECURE_RANDOM.nextBytes(bytes);
-        return Arrays.toString(bytes);
+        return new String(bytes);
     }
 
     public static String getSalt() {
