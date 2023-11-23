@@ -21,9 +21,12 @@ public class SHA256Hash {
         }
     }
 
-    public String convert(String text, String key) {
+    public String convert(String plain, String salt) {
+        return convert(plain + salt);
+    }
+
+    public String convert(String plain) {
         try {
-            var plain = text + key;
             var hash = MESSAGE_DIGEST.digest(plain.getBytes(StandardCharsets.UTF_8));
             return Arrays.toString(hash);
         } catch (Exception e) {
