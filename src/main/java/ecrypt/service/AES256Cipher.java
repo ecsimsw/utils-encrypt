@@ -39,7 +39,7 @@ public class AES256Cipher {
 
     public String encrypt(String plain) {
         var encrypted = encrypt(plain.getBytes(StandardCharsets.UTF_8));
-        return new String(encrypted);
+        return Base64.getEncoder().encodeToString(encrypted);
     }
 
     public byte[] encrypt(byte[] plain) {
