@@ -11,10 +11,10 @@ public class SHA256Utils {
 
     private static final SecureRandom SECURE_RANDOM = new SecureRandom();
 
-    public static String encrypt(String text, String key) {
+    public static String encrypt(String text, String salt) {
         try {
             var digest = MessageDigest.getInstance("SHA-256");
-            var plain = text + key;
+            var plain = text + salt;
             var hash = digest.digest(plain.getBytes(StandardCharsets.UTF_8));
             return Base64.getEncoder().encodeToString(hash);
         } catch (Exception e) {
